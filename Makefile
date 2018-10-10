@@ -215,6 +215,14 @@ libtcc.so: $(LIBTCC_OBJ)
 libtcc.so: CFLAGS+=-fPIC
 libtcc.so: LDFLAGS+=-fPIC
 
+# dynamic libtcc library
+libtcc.dylib: $(LIBTCC_OBJ)
+	$(CC) -shared -Wl,-install_name,$@ -o $@ $^ $(LDFLAGS)
+	cp $@ lib/
+
+libtcc.dylib: CFLAGS+=-fPIC
+libtcc.dylib: LDFLAGS+=-fPIC
+
 # windows dynamic libtcc library
 libtcc.dll : $(LIBTCC_OBJ)
 	$(CC) -shared -o $@ $^ $(LDFLAGS)
@@ -351,7 +359,7 @@ tests2.%:
 
 clean:
 	rm -f tcc$(EXESUF) tcc_p$(EXESUF) *-tcc$(EXESUF) tcc.pod
-	rm -f  *~ *.o *.a *.so* *.out *.log lib*.def *.exe *.dll a.out tags TAGS
+	rm -f  *~ *.o *.a *.so* *.dylib* *.out *.log lib*.def *.exe *.dll a.out tags TAGS
 	@$(MAKE) -C lib $@
 	@$(MAKE) -C tests $@
 

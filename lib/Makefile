@@ -70,4 +70,4 @@ $(X)crt1w.o : crt1.c
 $(X)wincrt1w.o : wincrt1.c
 
 clean :
-	rm -f *.a *.o $(BIN)
+	rm -f *.a *.o $(BIN) *.dylib
